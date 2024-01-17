@@ -19,11 +19,23 @@ jobs:
 
     - name: Install CocoaPods and Fastlane
       run: |
+        cd ios
         # gem install cocoapods
         gem install fastlane -NV
+        cd ..
+
+    - name: Flutter Build
+      run: |
+        cd ios
+        fastlane match_all
+        cd ..
+        flutter build ios
 
     # - name: Install Dependencies
-    #   run: pod install
+    #   run: |
+    #     cd ios
+    #     pod install
+    #     cd ..
 
     - name: upload testflight
       # env:
@@ -33,9 +45,12 @@ jobs:
       #   # APP_IDENTIFIER: ${{ secrets.APP_IDENTIFIER }}
       #   # FASTLANE_PASSWORD: 2222
       run: |
-        fastlane action app_store_connect_api_key
+        cd ios
+        # fastlane action app_store_connect_api_key
         fastlane release
         # fastlane match_all
+        cd ..
+
 
     # - name: upload testflight1
     #   run: fastlane release
