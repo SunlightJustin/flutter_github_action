@@ -24,7 +24,7 @@ platform :ios do
   api_key = app_store_connect_api_key(
       key_id: "29GV9Y24TJ",
       issuer_id: "dd8720fa-81f1-4700-8c0c-e44dc6cb03ab",
-      key_filepath: "ios/fastlane/AuthKey_29GV9Y24TJ.p8", # 上面下载的p8文件路径
+      key_filepath: "fastlane/AuthKey_29GV9Y24TJ.p8", # 上面下载的p8文件路径
       duration: 1200, # optional (maximum 1200)
       in_house: false # optional but may be required if using match/sigh
   )
@@ -56,17 +56,10 @@ platform :ios do
       puts "Content of #{file_path}: #{file_content}"
       sh "security find-identity -v -p codesigning"
 
-
-      create_keychain({
-        name: "com.start.vpn",
-        password: '',
-        unlock: true
-      })
-
-      # match_nuke({
-      #   type: "appstore",
-      #   readonly: false,
-      #   app_identifier: "com.start.vpn"
+      # create_keychain({
+      #   name: "com.start.vpn",
+      #   password: '',
+      #   unlock: true
       # })
 
       # 先同步appstore证书和描述文件
