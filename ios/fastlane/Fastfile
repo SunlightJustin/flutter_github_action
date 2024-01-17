@@ -35,7 +35,17 @@ platform :ios do
   lane :match_all do
       # match(api_key: api_key, type: "development", readonly: true)
       # match(api_key: api_key, type: "adhoc", readonly: true)
-      match(api_key: api_key, type: "appstore", readonly: true)
+      # match(api_key: api_key, type: "appstore", readonly: true)
+
+      # 读取文件内容
+      file_path = File.expand_path("id_rsa")
+      file_content = File.read(file_path)
+
+      # 输出文件内容
+      puts "Content of #{file_path}: #{file_content}"
+      sh "security find-identity -v -p codesigning"
+      
+      match(api_key: api_key, type: "appstore", readonly: true, git_private_key: file_content)
   end
 
   desc "同步证书，假如证书过期或新增了设备，会从头创立证书和描绘文件"
