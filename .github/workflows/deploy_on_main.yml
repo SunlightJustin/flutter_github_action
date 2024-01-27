@@ -24,12 +24,32 @@ jobs:
         gem install fastlane -NV
         cd ..
 
-    - name: Flutter Build
+    - name: Install Apple certificates
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-filepath: 
+        p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
+        p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+
+    - name: Install and set Flutter version
+      uses: subosito/flutter-action@v1.4.0
+      with:
+        flutter-version: '3.16.5'
+        channel: 'stable'
+        architecture: x64
+
+    - name: Restore packages
+      run: flutter pub get
+
+    - name: Install certificates
       run: |
         cd ios
         fastlane match_all
         cd ..
-        flutter build ios
+
+    - name: Build the app
+      run: flutter build ios --release --no-codesign
+        # flutter build ios
 
     # - name: Install Dependencies
     #   run: |
@@ -46,11 +66,15 @@ jobs:
       #   # FASTLANE_PASSWORD: 2222
       run: |
         cd ios
-        # fastlane action app_store_connect_api_key
         fastlane release
-        # fastlane match_all
         cd ..
 
+      # run: |
+      #   cd ios
+      #   # fastlane action app_store_connect_api_key
+      #   fastlane release
+      #   # fastlane match_all
+      #   cd ..
 
     # - name: upload testflight1
     #   run: fastlane release

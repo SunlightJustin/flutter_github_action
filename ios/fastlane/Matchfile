@@ -19,7 +19,7 @@ git_branch("master")  # git分支称号
 
 # bundleId，能够填多个bundleId，如App内包括 extension
 app_identifier(["com.start.vpn"])
-keychain_password('')
+#keychain_password('')
 
 
 ENV["MATCH_PASSWORD"] = "2222" # 导出
