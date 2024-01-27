@@ -24,10 +24,10 @@ jobs:
     #     gem install fastlane -NV
     #     # cd ..
 
-    # - name: Install CocoaPods and Fastlane
-    #   run: |
-    #     # gem install cocoapods
-    #     gem install fastlane -NV
+    - name: Install CocoaPods and Fastlane
+      run: |
+        # gem install cocoapods
+        gem install fastlane -NV
 
     # - name: Install Dependencies
     #   run: pod install
