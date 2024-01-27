@@ -22,7 +22,7 @@ jobs:
         cd ios
         # gem install cocoapods
         gem install fastlane -NV
-        cd ..
+        # cd ..
 
     - name: Install Apple certificates
       uses: apple-actions/import-codesign-certs@v1
