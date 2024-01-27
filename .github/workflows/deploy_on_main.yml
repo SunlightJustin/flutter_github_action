@@ -17,19 +17,35 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install CocoaPods and Fastlane
-      run: |
-        cd ios
-        # gem install cocoapods
-        gem install fastlane -NV
-        # cd ..
+    # - name: Install CocoaPods and Fastlane
+    #   run: |
+    #     cd ios
+    #     # gem install cocoapods
+    #     gem install fastlane -NV
+    #     # cd ..
+
+    # - name: Install CocoaPods and Fastlane
+    #   run: |
+    #     # gem install cocoapods
+    #     gem install fastlane -NV
+
+    # - name: Install Dependencies
+    #   run: pod install
 
     - name: Install Apple certificates
       uses: apple-actions/import-codesign-certs@v1
       with:
-        p12-filepath: 
-        p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
-        p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+        p12-filepath: ios/fastlane/Certificates11.p12
+        # p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
+        # p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+        p12-password: 2222
+
+    # - name: Install Apple certificates
+    #   uses: apple-actions/import-codesign-certs@v1
+    #   with:
+    #     p12-filepath: 
+    #     p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
+    #     p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
 
     - name: Install and set Flutter version
       uses: subosito/flutter-action@v1.4.0
