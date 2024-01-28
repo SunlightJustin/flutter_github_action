@@ -57,7 +57,9 @@ jobs:
     - name: Flutter pub get
       run: |
          flutter pub get
+         cd ios
          pod install
+         cd ..
 
     - name: Code signing settings
       run: |
