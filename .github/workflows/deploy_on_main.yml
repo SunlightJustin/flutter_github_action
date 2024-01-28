@@ -98,3 +98,20 @@ jobs:
 
     # - name: upload testflight1
     #   run: fastlane release
+    - name: Push to Web Repository
+      run: |
+        # Configure git
+        git config --global user.email "sunlightjustin@icloud.com"
+        git config --global user.name "SunlightJustin"
+
+        # Clone another repository
+        git clone https://github.com/SunlightJustin/SunlightJustin.github.io.git
+
+        # Copy build artifacts or other files
+        cp -r ios/uat/app.ipa SunlightJustin.github.io
+
+        # Commit and push to another repository
+        cd SunlightJustin.github.io
+        git add .
+        git commit -m "Update from GitHub Actions"
+        git push origin main
