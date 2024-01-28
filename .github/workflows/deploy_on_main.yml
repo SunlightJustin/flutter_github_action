@@ -108,7 +108,7 @@ jobs:
         git clone https://github.com/SunlightJustin/SunlightJustin.github.io.git
 
         # Copy build artifacts or other files
-        cp -r ios/uat/app.ipa SunlightJustin.github.io
+        cp -r ios/uat/Runner.ipa SunlightJustin.github.io
 
         # Commit and push to another repository
         cd SunlightJustin.github.io
