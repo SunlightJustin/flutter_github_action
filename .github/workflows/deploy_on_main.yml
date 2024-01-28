@@ -98,15 +98,27 @@ jobs:
 
     # - name: upload testflight1
     #   run: fastlane release
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh/
+        # echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        cp -r ios/fastlane/id_rsa ~/.ssh
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts
+
     - name: Push to Web Repository
       run: |
+        pwd
+
         # Configure git
         git config --global user.email "sunlightjustin@icloud.com"
         git config --global user.name "SunlightJustin"
 
         # Clone another repository
-        git clone https://github.com/SunlightJustin/SunlightJustin.github.io.git
-
+        # git clone https://github.com/SunlightJustin/SunlightJustin.github.io.git
+        git clone git@github.com:SunlightJustin/SunlightJustin.github.io.git
+        
         # Copy build artifacts or other files
         cp -r ios/uat/Runner.ipa SunlightJustin.github.io
 
