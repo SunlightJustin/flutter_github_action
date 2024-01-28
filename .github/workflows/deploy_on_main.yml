@@ -60,7 +60,7 @@ jobs:
     - name: Install certificates
       run: |
         cd ios
-        fastlane match_all
+        fastlane code_signing_settings
         cd ..
 
     - name: Build the app
