@@ -111,7 +111,7 @@ jobs:
         git commit -m "Update from GitHub Actions"
         git push origin main
 
-build_release:
+  build_release:
     needs: build_default
     runs-on: macos-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/release'  # 添加条件判断，只有在 adhoc 分支上推送时执行
