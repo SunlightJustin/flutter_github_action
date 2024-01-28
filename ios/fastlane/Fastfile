@@ -29,11 +29,10 @@ platform :ios do
       in_house: false # optional but may be required if using match/sigh
   )
   xcodeproj_name = "Runner"
+  teamid = "3D59AJD96Y"
+  bundle_identifier = "com.start.vpn"
 
   lane :code_signing_settings do
-
-      teamid = "3D59AJD96Y"
-      bundle_identifier = "com.start.vpn"
 
       # 读取文件内容
       file_path = File.expand_path("id_rsa")
@@ -92,6 +91,7 @@ platform :ios do
             provisioningProfiles: { 
               bundle_identifier => "dis_start2"
             }  
+            generateAppStoreInformation: true            
           },
           scheme: xcodeproj_name,
           workspace: xcodeproj_name +".xcworkspace",
