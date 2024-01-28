@@ -64,7 +64,7 @@ jobs:
     - name: Code signing settings
       run: |
         cd ios
-        fastlane code_signing_settings
+        fastlane code_signing_settings_adhoc
         cd ..
 
     # - name: Build the app
@@ -86,7 +86,7 @@ jobs:
       #   # FASTLANE_PASSWORD: 2222
       run: |
         cd ios
-        fastlane release
+        fastlane adhoc
         cd ..
 
       # run: |
