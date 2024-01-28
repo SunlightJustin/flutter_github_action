@@ -32,6 +32,7 @@ platform :ios do
   xcodeproj_name = "Runner"
   teamid = "3D59AJD96Y"
   bundle_identifier = "com.start.vpn"
+  mobile_provision_name = "adhoc_start"
 
   lane :code_signing_settings do
 
@@ -46,13 +47,13 @@ platform :ios do
       update_project_provisioning(
           xcodeproj: xcodeproj_name + ".xcodeproj",
           target_filter: ".*Runner.*", # matches name or type of a target
-          profile: "fastlane/dis_start2.mobileprovision", # optional if you use sigh
+          profile: "fastlane/#{mobile_provision_name}.mobileprovision", # optional if you use sigh
           build_configuration: "Release",
           # certificate: "fastlane/Certificates11.p12",
           code_signing_identity: "iPhone Distribution" # optionally specify the codesigning identity
       )
 
-      update_code_signing_settings(team_id: teamid, profile_name: "dis_start2", bundle_identifier: bundle_identifier, code_sign_identity: "iPhone Distribution")
+      update_code_signing_settings(team_id: teamid, profile_name: mobile_provision_name, bundle_identifier: bundle_identifier, code_sign_identity: "iPhone Distribution")
 
       sigh(
           api_key: api_key,
@@ -60,7 +61,7 @@ platform :ios do
           username: "song19861206@163.com",
           team_id: teamid,
           team_name: "huasong teng",
-          provisioning_name: "dis_start2"
+          provisioning_name: mobile_provision_name
       )
   end
 
@@ -90,7 +91,7 @@ platform :ios do
           export_xcargs: "-allowProvisioningUpdates", #keychain授权
           export_options: {
             provisioningProfiles: { 
-              bundle_identifier => "dis_start2"
+              bundle_identifier => mobile_provision_name
             },
             generateAppStoreInformation: true            
           },
@@ -98,7 +99,7 @@ platform :ios do
           workspace: xcodeproj_name +".xcworkspace",
           clean: true,
           # export_method: "app-store",
-          export_method: "ad-hoc",  # 设置导出类型为 Ad-Hoc
+          export_method: "ad-hoc",
           output_directory: outputDirectory
       )
       # # 上传应用到AppStore
