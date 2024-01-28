@@ -93,7 +93,7 @@ platform :ios do
               bundle_identifier => "dis_start2"
             }  
           },
-          # scheme: "github-actions-demo-ios",
+          scheme: xcodeproj_name,
           workspace: xcodeproj_name +".xcworkspace",
           clean: true,
           export_method: "app-store",
