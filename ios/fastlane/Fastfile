@@ -61,7 +61,8 @@ platform :ios do
           username: "song19861206@163.com",
           team_id: teamid,
           team_name: "huasong teng",
-          provisioning_name: mobile_provision_name
+          provisioning_name: mobile_provision_name,
+          adhoc: true,
       )
   end
 
