@@ -108,6 +108,7 @@ platform :ios do
             skip_metadata: true,
             submit_for_review: false,
             precheck_include_in_app_purchases: false,
+            ipa
       )
   end
 
