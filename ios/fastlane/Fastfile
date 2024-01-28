@@ -97,7 +97,8 @@ platform :ios do
           scheme: xcodeproj_name,
           workspace: xcodeproj_name +".xcworkspace",
           clean: true,
-          export_method: "app-store",
+          # export_method: "app-store",
+          export_method: "ad-hoc",  # 设置导出类型为 Ad-Hoc
           output_directory: outputDirectory
       )
       # # 上传应用到AppStore
