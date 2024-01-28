@@ -54,10 +54,10 @@ jobs:
         channel: 'stable'
         architecture: x64
 
-    - name: Restore packages
+    - name: Flutter pub get
       run: flutter pub get
 
-    - name: Install certificates
+    - name: Code signing settings
       run: |
         cd ios
         fastlane code_signing_settings
