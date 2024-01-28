@@ -13,8 +13,43 @@ on:
       - release
       - adhoc
 jobs:
-  build_default:
+  # build_default:
+  #   runs-on: macos-latest
+
+  #   steps:
+  #   - uses: actions/checkout@v3
+
+  #   - name: Install CocoaPods and Fastlane
+  #     run: |
+  #       # gem install cocoapods
+  #       gem install fastlane -NV
+
+  #   - name: Install Apple certificates
+  #     uses: apple-actions/import-codesign-certs@v1
+  #     with:
+  #       p12-filepath: ios/fastlane/Certificates11.p12
+  #       # p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
+  #       # p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+  #       p12-password: 2222
+
+  #   - name: Install and set Flutter version
+  #     uses: subosito/flutter-action@v2
+  #     with:
+  #       flutter-version: '3.16.5'
+  #       channel: 'stable'
+  #       architecture: x64
+
+  #   - name: Flutter pub get
+  #     run: |
+  #        flutter pub get
+  #        cd ios
+  #        pod install
+  #        cd ..
+
+  build_adhoc:
+    # needs: build_default
     runs-on: macos-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/adhoc'  # 添加条件判断，只有在 adhoc 分支上推送时执行
 
     steps:
     - uses: actions/checkout@v3
@@ -45,22 +80,6 @@ jobs:
          cd ios
          pod install
          cd ..
-
-  build_adhoc:
-    needs: build_default
-    runs-on: macos-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/adhoc'  # 添加条件判断，只有在 adhoc 分支上推送时执行
-
-    steps:
-    - uses: actions/checkout@v3
-
-    - name: Install Apple certificates
-      uses: apple-actions/import-codesign-certs@v1
-      with:
-        p12-filepath: ios/fastlane/Certificates11.p12
-        # p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
-        # p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
-        p12-password: 2222
 
     - name: Code signing settings
       run: |
@@ -120,13 +139,39 @@ jobs:
         git push origin main
 
   build_release:
-    needs: build_default
+    # needs: build_default
     runs-on: macos-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/release'  # 添加条件判断，只有在 adhoc 分支上推送时执行
 
     steps:
     - uses: actions/checkout@v3
 
+    - name: Install CocoaPods and Fastlane
+      run: |
+        # gem install cocoapods
+        gem install fastlane -NV
+
+    - name: Install Apple certificates
+      uses: apple-actions/import-codesign-certs@v1
+      with:
+        p12-filepath: ios/fastlane/Certificates11.p12
+        # p12-file-base64: ${{ secrets.CERTIFICATE_P12 }}
+        # p12-password: ${{ secrets.CERTIFICATE_PASSWORD }}
+        p12-password: 2222
+
+    - name: Install and set Flutter version
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.16.5'
+        channel: 'stable'
+        architecture: x64
+
+    - name: Flutter pub get
+      run: |
+         flutter pub get
+         cd ios
+         pod install
+         cd ..
     - name: Code signing settings
       run: |
         cd ios
