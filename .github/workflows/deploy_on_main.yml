@@ -134,7 +134,7 @@ jobs:
 
         # Commit and push to another repository
         cd SunlightJustin.github.io
-        sed 's/发版时间：[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} [0-9]\{2\}:[0-9]\{2\}/发版时间：'"$(date +'%Y-%m-%d %H:%M')"'/' index.html > tmpfile && mv tmpfile index.html
+        sed 's/发版时间：[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} [0-9]\{2\}:[0-9]\{2\}/发版时间：'"$(date +'%Y-%m-%d %H:%M' -d '+8 hours')"'/' index.html > tmpfile && mv tmpfile index.html
         git add .
         git commit -m "Update from GitHub Actions"
         git push origin main
